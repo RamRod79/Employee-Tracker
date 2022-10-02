@@ -1,7 +1,7 @@
 const mysql = require('mysql2');
 const express = require('express');
 const inquirer = require('inquirer');
-const conTable = require('console.table');
+const cTable = require('console.table');
 const db = require('./db/db');
 
 // Main menu function for options
