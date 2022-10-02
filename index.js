@@ -76,8 +76,71 @@ function mainMenu() {
    }
 })
 };
-   
-   
+
+// function for viewing all employees
+function viewAllEmployees() {
+    
+};
+
+// function for adding employees
+function addEmployees() {
+    
+};
+
+// function for updating employee roles
+function updateEmployeeRole() {
+    
+};
+
+// function for viewing all roles
+function viewAllRoles() {
+    
+};
+
+// function for adding roles
+function addRole() {
+    
+};
+
+// function for viewing all departments
+function viewAllDepts() {
+    
+};
+
+// function for adding departments
+function addDept() {
+    
+};
+
+// function for updating employee manager
+function updateEmployeeMngr() {
+    
+};
+
+// function for viewing employee manager
+function viewEmployeeMngr() {
+    
+};
+
+// function for viewing employee Department
+function viewEmployeeDept() {
+    
+};
+
+// function for deleting department
+function deleteDept() {
+    
+};
+
+// function for deleting role
+function deleteRole() {
+    
+};
+
+// function for deleting employee
+function deleteEmployee() {
+    
+};
    
    
 //     type: "list",
