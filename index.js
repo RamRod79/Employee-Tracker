@@ -4,7 +4,7 @@ const inquirer = require('inquirer');
 const conTable = require('console.table');
 const db = require('./db/db');
 
-
+// Main menu function for options
 function mainMenu() {
     inquirer
    .prompt([
@@ -31,14 +31,51 @@ function mainMenu() {
     ],
 }
    ])
-
+// Switch Case for selections and functions
   .then(answer => {
    switch (answer.mainMenu) {
     case "View All Employees":
         viewAllEmployees();
         break;
-    case 
+        case "Add Employee":
+            addEmployees();
+            break;
+            case "Update Employee Role":
+                updateEmployeeRole();
+                break;
+                case "View All Roles":
+                    viewAllRoles();
+                    break;
+                    case "Add Role":
+                        addRole();
+                        break;
+                        case "View All Departments":
+                            viewAllDepts();
+                            break;
+                            case "Add Department":
+                                addDept();
+                                break;
+                                case "Update Employee Manager":
+                                    updateEmployeeMngr();
+                                    break;
+                                    case "View Employee Manager":
+                                        viewEmployeeMngr();
+                                        break;
+                                        case "View Employee Department":
+                                            viewEmployeeDept();
+                                            break;
+                                            case "Delete Department":
+                                                deleteDept();
+                                                break;
+                                                case "Delete Role":
+                                                    deleteRole();
+                                                    break;
+                                                    case "Delete Employee":
+                                                    deleteEmployee();
+                                                    break;
    }
+})
+};
    
    
    
