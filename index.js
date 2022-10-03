@@ -2,7 +2,26 @@ const mysql = require('mysql2');
 const express = require('express');
 const inquirer = require('inquirer');
 const cTable = require('console.table');
-const db = require('./db/db');
+const db = require('./db/db.sql');
+
+const PORT = process.env.PORT || 3199;
+const app = express();
+
+// Express middleware
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
+// Default response for any other request (Not Found)
+app.use((req, res) => {
+  res.status(404).end();
+});
+
+// Start server after DB connection
+db.connect(err => {
+  if (err) throw err;
+  app.listen(PORT, () => {});
+});
+
 
 // Main menu function for options
 function mainMenu() {
@@ -94,7 +113,7 @@ function viewAllEmployees() {
 db.query(sql, (err, result) => {
 if (err) throw err;
 console.table(result);
-startPrompt();
+mainMenu();
 });
 };
 
@@ -130,10 +149,10 @@ function addEmployees() {
             db.query(`SELECT * FROM employee`, (err, result) => {
                 if (err) {
                     res.status(500).json({ error: err.message })
-                    startPrompt();
+                    mainMenu();
                 }
                 console.table(result);
-                startPrompt();
+                mainMenu();
             });
         })
 });   
@@ -160,10 +179,10 @@ function updateEmployeeRole() {
             db.query(`SELECT * FROM employee`, (err, result) => {
                 if (err) {
                     res.status(500).json({ error: err.message })
-                    startPrompt();
+                    mainMenu();
                 }
                 console.table(result);
-                startPrompt();
+                mainMenu();
             });
         })
 }); 
@@ -178,7 +197,7 @@ function viewAllRoles() {
             return;
         }
         console.table(result);
-        startPrompt();
+        mainMenu();
     });
 };
 
@@ -209,13 +228,14 @@ function addRole() {
                 db.query(`SELECT * FROM role`, (err, result) => {
                     if (err) {
                         res.status(500).json({ error: err.message })
-                        startPrompt();
+                        mainMenu();
                     }
                     console.table(result);
-                    startPrompt();
+                    mainMenu();
                 });
             })
     });  
+};
 };
 
 // function for viewing all departments
@@ -227,7 +247,7 @@ function viewAllDepts() {
             return;
         }
         console.table(result);
-        startPrompt();
+        mainMenu();
     }); 
 };
 
@@ -254,7 +274,7 @@ function addDept() {
                 return;
             }
             console.table(result);
-            startPrompt();
+            mainMenu();
         });
     });
 });   
@@ -281,10 +301,10 @@ function updateEmployeeMngr() {
             db.query(`SELECT * FROM employee`, (err, result) => {
                 if (err) {
                     res.status(500).json({ error: err.message })
-                    startPrompt();
+                    mainMenu();
                 }
                 console.table(result);
-                startPrompt();
+                mainMenu();
             });
         })
 }); 
@@ -311,7 +331,7 @@ function viewEmployeeMngr() {
                       return;
                   }
                   console.table(result);
-                  startPrompt();
+                  mainMenu();
               });
 };
 
@@ -324,7 +344,7 @@ function viewEmployeeDept() {
             return;
         }
         console.table(result);
-        startPrompt();
+        mainMenu();
     });   
 };
 
@@ -344,10 +364,10 @@ function deleteDept() {
             db.query(`SELECT * FROM department`, (err, result) => {
                 if (err) {
                     res.status(500).json({ error: err.message })
-                    startPrompt();
+                    mainMenu();
                 }
                 console.table(result);
-                startPrompt();
+                mainMenu();
             });
         })
 });   
@@ -369,10 +389,10 @@ function deleteRole() {
             db.query(`SELECT * FROM role`, (err, result) => {
                 if (err) {
                     res.status(500).json({ error: err.message })
-                    startPrompt();
+                    mainMenu();
                 }
                 console.table(result);
-                startPrompt();
+                mainMenu();
             });
         })
 });
@@ -394,16 +414,16 @@ function deleteEmployee() {
             db.query(`SELECT * FROM employee`, (err, result) => {
                 if (err) {
                     res.status(500).json({ error: err.message })
-                    startPrompt();
+                    mainMenu();
                 }
                 console.table(result);
-                startPrompt();
+                mainMenu();
             });
         })
 });   
 };
 
-startPrompt();
+mainMenu();
    
    
 //     type: "list",
@@ -522,5 +542,4 @@ startPrompt();
     //     managers.push(new Manager(id, email, name, officeNumber));
     
     //     createTeam();
-    //    })
-    // }
+

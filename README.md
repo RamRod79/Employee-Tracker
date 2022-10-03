@@ -4,11 +4,9 @@
 
 A short description explaining the what, why, and how of project "Employee-Tracker":
 
-An application called "Employee-Tracker" that can be used to write and save notes. This application uses an Express.js back end and will save and retrieve note data from a JSON file.
+An application called "Employee-Tracker" that is a command-line application which can manage a company's employee database, using Node.js, Inquirer, and MySQL.
 
-Built a back end, connect to an existing front end, and then deployed the entire application to Heroku.
-
-A walkthrough video that demonstrates its functionality and all of the tests passing is included with a link to the video of your project. 
+A walkthrough video that demonstrates its functionality is included with a link to the video of your project. 
 
 ## User Story
 
@@ -58,7 +56,23 @@ THEN I am prompted to select an employee to update and their new role and this i
 
 Pulling the GitHub repository from the follwing URL: https://github.com/RamRod79/Employee-tracker.git and typing the follwoing command ,'npm install', in the terminal will ensure the dependencies are installed and the program can run properly.
 
-Install nodemon and express to ensure files run correctly and that the server continually connects, then you can type "npm run watch" in the terminal to ensure the server does not stop running.
+- Download and run mysql server.
+
+- Download the repository to your own local machine and run it from your command line.
+
+- Run ```npm i``` or ```npm install``` in order to download all the dependencies.
+
+- MySQL instructions to create your tables:
+
+        - Enter ```mysql -u root -p``` in the terminal window.
+        - Enter your mysql password. 
+        - Create database by entering ```CREATE DATABASE employee;``` and enter.
+        - Then enter ```SHOW databases;```.
+        - To use the employees database; enter ```USE employee;```.
+        - In order to use your .sql files enter ```source db/schema.sql;``` and enter, then type ```source db/seeds.sql;``` and enter.
+        - Exit MySQL by entering ```quit;```.
+  
+  Run ```node index.js``` or ```npm start``` in your terminal to satrt.
 
 ## Usage
 
