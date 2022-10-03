@@ -66,9 +66,9 @@ Pulling the GitHub repository from the follwing URL: https://github.com/RamRod79
 
         - Enter ```mysql -u root -p``` in the terminal window.
         - Enter your mysql password. 
-        - Create database by entering ```CREATE DATABASE employee;``` and enter.
+        - Create database by entering ```CREATE DATABASE employeeTracker_db;``` and enter.
         - Then enter ```SHOW databases;```.
-        - To use the employees database; enter ```USE employee;```.
+        - To use the employees database; enter ```USE employeeTracker_db;```.
         - In order to use your .sql files enter ```source db/schema.sql;``` and enter, then type ```source db/seeds.sql;``` and enter.
         - Exit MySQL by entering ```quit;```.
   
