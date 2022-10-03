@@ -76,8 +76,8 @@ Pulling the GitHub repository from the follwing URL: https://github.com/RamRod79
 
 ## Usage
 
-![Screenshot of app being used.](./public/assets/images/Screenshot01.jpg)
-![Screenshot of app being used.](./public/assets/images/Screenshot02.jpg)
+![Screenshot of app being used.](./assets/images/Screenshot01.jpg)
+![Screenshot of app being used.](./assets/images/Screenshot02.jpg)
 
 ## Credits
 
