@@ -1,26 +1,9 @@
 const mysql = require("mysql2");
 const express = require("express");
 const inquirer = require("inquirer");
-const cTable = require("console.table");
-const db = require("./db/db.sql");
+require("console.table");
+const db = require("./db/db.js");
 
-const PORT = process.env.PORT || 3199;
-const app = express();
-
-// Express middleware
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
-
-// Default response for any other request (Not Found)
-app.use((req, res) => {
-  res.status(404).end();
-});
-
-// Start server after DB connection
-db.connect((err) => {
-  if (err) throw err;
-  app.listen(PORT, () => {});
-});
 
 // Main menu function for options
 function mainMenu() {
@@ -30,7 +13,7 @@ function mainMenu() {
       name: "menu",
       message: "What would you like to do?",
       choices: [
-        "View all Employees",
+        "View All Employees",
         "Add Employee",
         "Update Employee Role",
         "View All Roles",
@@ -89,26 +72,27 @@ function mainMenu() {
         case "Delete Employee":
           deleteEmployee();
           break;
+          default:
+            process.exit()
       }
     })
 };
 
 // function for viewing all employees
 function viewAllEmployees() {
-  const sql = `SELECT employee.id,
-    employee.first_name,
-    employee.last_name,
-    role.title AS job_title,
-    department.department_name,
-    role.salary,
-    CONCAT(manager.first_name, ' ' ,manager.last_name) AS manager
+    const sql = `SELECT employee.id, employee.first_name AS "first name", employee.last_name 
+    AS "last name", role.title, department.department_name AS department, role.salary, 
+    concat(manager.first_name, " ", manager.last_name) AS manager
     FROM employee
-    LEFT JOIN role ON employee.role_id = role.id
-    LEFT JOIN department ON role.department_id = department.id
-    LEFT JOIN employee AS manager ON employee.manager_id = manager.id
-    ORDER By employee.id`;
+    LEFT JOIN role
+    ON employee.role_id = role.id
+    LEFT JOIN department
+    ON role.department_id = department.id
+    LEFT JOIN employee manager
+    ON manager.id = employee.manager_id`;
+
   db.query(sql, (err, result) => {
-    if (err) throw err;
+    if (err) console.log(err);
     console.table(result);
     mainMenu();
   });
@@ -338,29 +322,29 @@ function updateEmployeeMngr() {
 };
 
 // function for viewing employee manager
-// function viewEmployeeMngr() {
-//   const sql = `  SELECT 
-//                     CONCAT(manager.first_name, ' ' ,manager.last_name) AS manager,
-//                     employee.id, 
-//                     employee.first_name, 
-//                     employee.last_name,  
-//                     roles.title AS Title,
-//                     department.department_name, 
-//                     roles.salary
-//                     FROM employee 
-//                     JOIN roles ON employee.role_id = roles.id
-//                     JOIN department ON roles.department_id = department.id
-//                     LEFT JOIN  employee AS manager ON employee.manager_id = manager.id
-//                     ORDER BY manager`;
-//   db.query(sql, (err, result) => {
-//     if (err) {
-//       res.status(400).json({ error: err.message });
-//       return;
-//     }
-//     console.table(result);
-//     mainMenu();
-//   });
-// };
+function viewEmployeeMngr() {
+  const sql = `  SELECT 
+                    CONCAT(manager.first_name, ' ' ,manager.last_name) AS manager,
+                    employee.id, 
+                    employee.first_name, 
+                    employee.last_name,  
+                    roles.title AS Title,
+                    department.department_name, 
+                    roles.salary
+                    FROM employee 
+                    JOIN roles ON employee.role_id = roles.id
+                    JOIN department ON roles.department_id = department.id
+                    LEFT JOIN  employee AS manager ON employee.manager_id = manager.id
+                    ORDER BY manager`;
+  db.query(sql, (err, result) => {
+    if (err) {
+      res.status(400).json({ error: err.message });
+      return;
+    }
+    console.table(result);
+    mainMenu();
+  });
+};
 
 // function for viewing employee Department
 function viewEmployeeDept() {
