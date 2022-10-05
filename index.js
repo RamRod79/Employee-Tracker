@@ -21,7 +21,7 @@ function mainMenu() {
         "View All Departments",
         "Add Department",
         "Update Employee Manager",
-        "View Employee Manager",
+        // "View Employee Manager",
         "View Employee Department",
         "Delete Department",
         "Delete Role",
@@ -57,9 +57,9 @@ function mainMenu() {
         case "Update Employee Manager":
           updateEmployeeMngr();
           break;
-        case "View Employee Manager":
-          viewEmployeeMngr();
-          break;
+        // case "View Employee Manager":
+        //   viewEmployeeMngr();
+        //   break;
         case "View Employee Department":
           viewEmployeeDept();
           break;
@@ -322,29 +322,29 @@ function updateEmployeeMngr() {
 };
 
 // function for viewing employee manager
-function viewEmployeeMngr() {
-  const sql = `  SELECT 
-                    CONCAT(manager.first_name, ' ' ,manager.last_name) AS manager,
-                    employee.id, 
-                    employee.first_name, 
-                    employee.last_name,  
-                    roles.title AS Title,
-                    department.department_name, 
-                    roles.salary
-                    FROM employee 
-                    JOIN roles ON employee.role_id = roles.id
-                    JOIN department ON roles.department_id = department.id
-                    LEFT JOIN  employee AS manager ON employee.manager_id = manager.id
-                    ORDER BY manager`;
-  db.query(sql, (err, result) => {
-    if (err) {
-      res.status(400).json({ error: err.message });
-      return;
-    }
-    console.table(result);
-    mainMenu();
-  });
-};
+// function viewEmployeeMngr() {
+//   const sql = `  SELECT 
+//                     CONCAT(manager.first_name, ' ' ,manager.last_name) AS manager,
+//                     employee.id, 
+//                     employee.first_name, 
+//                     employee.last_name,  
+//                     roles.title AS Title,
+//                     department.department_name, 
+//                     roles.salary
+//                     FROM employee 
+//                     JOIN roles ON employee.role_id = roles.id
+//                     JOIN department ON roles.department_id = department.id
+//                     LEFT JOIN  employee AS manager ON employee.manager_id = manager.id
+//                     ORDER BY manager`;
+//   db.query(sql, (err, result) => {
+//     if (err) {
+//       res.status(400).json({ error: err.message });
+//       return;
+//     }
+//     console.table(result);
+//     mainMenu();
+//   });
+// };
 
 // function for viewing employee Department
 function viewEmployeeDept() {
